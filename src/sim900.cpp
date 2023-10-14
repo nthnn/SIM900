@@ -24,7 +24,7 @@ String SIM900::getReturnedMode() {
 }
 
 bool SIM900::isSuccessCommand() {
-    return this->getReturnedMode().compareTo("OK");
+    return this->getReturnedMode() == "OK";
 }
 
 SIM900::SIM900(SoftwareSerial *_sim900):
