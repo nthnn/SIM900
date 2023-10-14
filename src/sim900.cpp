@@ -107,7 +107,7 @@ bool SIM900::sendSMS(String number, String message) {
     delay(500);
 
     this->sim900->write(0x1a);
-    return this->getReturnedMode() == ">";
+    return this->getReturnedMode() == ("> " + message);
 }
 
 void SIM900::close() {

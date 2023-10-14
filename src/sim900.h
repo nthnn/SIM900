@@ -16,6 +16,9 @@ private:
     String getResponse();
     String getReturnedMode();
 
+    String rawQueryOnLine(uint16_t line);
+    String queryResult();
+
 public:
     SIM900(SoftwareSerial *_sim900);
     bool handshake();
@@ -27,6 +30,12 @@ public:
     bool hangUp();
 
     bool sendSMS(String number, String message);
+
+    String manufacturer();
+    String productID();
+    String softwareRelease();
+    String imei();
+    String chipName();
 };
 
 #endif
