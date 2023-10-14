@@ -27,4 +27,6 @@ jobs:
 
       - name: Build Arduino library
         run: |
+          arduino-cli compile --fqbn arduino:avr:uno --library src --build-path build examples/dial_up/dial_up.ino
+          arduino-cli compile --fqbn arduino:avr:uno --library src --build-path build examples/handshake/handshake.ino
           arduino-cli compile --fqbn arduino:avr:uno --library src --build-path build examples/sms_send_example/sms_send_example.ino
