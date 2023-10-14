@@ -1,0 +1,38 @@
+{
+    "name": "SIM900",
+    "version": "1.0.0",
+    "description": "Arduino SIM900 Shield Comprehensive Library",
+    "keywords": ["SIM900", "Shield", "Communication"],
+    "authors": [
+      {
+        "name": "ntnn",
+        "email": "nthnn@gmail.com"
+      }
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/nthnn"
+    },
+    "platforms": [
+      "espressif8266",
+      "espressif32",
+      "atmelavr",
+      "stm32",
+      "teensy",
+      "timsp430",
+      "nordicnrf51",
+      "nordicnrf52",
+      "microchippic32",
+      "ambiot",
+      "espressif8266",
+      "ststm32",
+      "espressif32"
+    ],
+    "frameworks": ["arduino"],
+    "dependencies": [
+      {
+        "name": "SoftwareSerial"
+      }
+    ]
+  }
+  
