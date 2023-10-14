@@ -32,9 +32,9 @@ public:
     bool sendSMS(String number, String message);
 
     String manufacturer();
-    String productID();
     String softwareRelease();
     String imei();
+    String chipModel();
     String chipName();
 };
 
