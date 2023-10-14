@@ -1,0 +1,30 @@
+name: Arduino CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Chocolatey (Windows package manager)
+        if: runner.os == 'Windows'
+        run: |
+          Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+      - name: Install Arduino CLI (Windows)
+        if: runner.os == 'Windows'
+        run: choco install arduino-cli -y
+
+      - name: AVR Core Installation
+        run: arduino-cli.exe core install arduino:avr
+
+      - name: Build Arduino library
+        run: |
+          arduino-cli compile --fqbn arduino:avr:uno --library src --build-path build examples/sms_send_example/sms_send_example.ino
