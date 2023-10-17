@@ -31,6 +31,10 @@ public:
 
     bool sendSMS(String number, String message);
 
+    SIM900Operator networkOperator();
+    SIM900RTC rtc();
+    bool updateRtc(SIM900RTC config);
+
     String manufacturer();
     String softwareRelease();
     String imei();
