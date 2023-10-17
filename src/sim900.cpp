@@ -146,7 +146,24 @@ bool SIM900::sendSMS(String number, String message) {
     return this->getReturnedMode().startsWith(">");
 }
 
-//SIM900Operator SIM900::networkOperator();
+SIM900Operator SIM900::networkOperator() {
+    SIM900Operator simOperator;
+    simOperator.mode = 0;
+    simOperator.format = 0;
+    simOperator.name = "";
+
+    this->sendCommand(F("AT+COPS?"));
+
+    String response = this->queryResult();
+    uint8_t delim1 = response.indexOf(','),
+        delim2 = response.indexOf(',', delim1 + 1);
+
+    simOperator.mode = (uint8_t) response.substring(0, delim1).toInt();
+    simOperator.format = (uint8_t) response.substring(delim1 + 1, delim2).toInt();
+    simOperator.name = response.substring(delim2 + 2, response.length() - 2);
+
+    return simOperator;
+}
 
 bool SIM900::updateRtc(SIM900RTC config) {
     this->sendCommand(
