@@ -30,5 +30,6 @@ jobs:
           arduino-cli compile --fqbn arduino:avr:uno --library src --build-path build examples/board_info/board_info.ino
           arduino-cli compile --fqbn arduino:avr:uno --library src --build-path build examples/dial_up/dial_up.ino
           arduino-cli compile --fqbn arduino:avr:uno --library src --build-path build examples/handshake/handshake.ino
+          arduino-cli compile --fqbn arduino:avr:uno --library src --build-path build examples/network_op/network_op.ino
           arduino-cli compile --fqbn arduino:avr:uno --library src --build-path build examples/rtc_example/rtc_example.ino
           arduino-cli compile --fqbn arduino:avr:uno --library src --build-path build examples/sms_send_example/sms_send_example.ino
