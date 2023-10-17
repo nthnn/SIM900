@@ -11,7 +11,7 @@ typedef enum _SIM900DialResult {
 } SIM900DialResult;
 
 typedef struct _SIM900Operator {
-    uint16_t status, format;
+    uint16_t mode, format;
     String name;
 } SIM900Operator;
 
