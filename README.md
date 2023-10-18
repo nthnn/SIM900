@@ -77,6 +77,10 @@ The repository includes a variety of example sketches that demonstrate the libra
 
 Contributions and feedback are all welcome to enhance this library. If you encounter any issues, have suggestions for improvements, or would like to contribute code, please do so.
 
+## Credits
+
+- The SIM900 vector image above was from a [Fritzing](https://fritzing.org) part, found at [https://forum.fritzing.org/t/sim900-part-request/17688](https://forum.fritzing.org/t/sim900-part-request/17688).
+
 ## License
 
 Copyright 2023 - Nathanne Isip
