@@ -27,6 +27,7 @@ public:
 
     bool isCardReady();
     bool changeCardPin(uint8_t pin);
+    SIM900Signal signal();
 
     SIM900DialResult dialUp(String number);
     SIM900DialResult redialUp();
@@ -47,7 +48,8 @@ public:
 
     bool savePhonebook(uint8_t index, SIM900CardAccount account);
     bool deletePhonebook(uint8_t index);
-    SIM900CardAccount retrievePhonebook(uint8_t index);    
+    SIM900CardAccount retrievePhonebook(uint8_t index);
+    SIM900PhonebookCapacity phonebookCapacity();
 
     String manufacturer();
     String softwareRelease();

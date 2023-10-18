@@ -82,6 +82,23 @@ bool SIM900::changeCardPin(uint8_t pin) {
     return this->isSuccessCommand();
 }
 
+SIM900Signal SIM900::signal() {
+    SIM900Signal signal;
+    signal.rssi = signal.bit_error_rate = 0;
+    this->sendCommand("AT+CSQ");
+
+    String response = this->queryResult();
+    uint8_t delim = response.indexOf(',');
+
+    if(delim == -1)
+        return signal;
+
+    signal.rssi = (uint8_t) response.substring(0, delim).toInt();
+    signal.bit_error_rate = (uint8_t) response.substring(delim + 1).toInt();
+
+    return signal;
+}
+
 void SIM900::close() {
     this->sim900->end();
 }
@@ -329,6 +346,24 @@ SIM900CardAccount SIM900::retrievePhonebook(uint8_t index) {
 bool SIM900::deletePhonebook(uint8_t index) {
     this->sendCommand("AT+CPBW=" + String(index));
     return this->isSuccessCommand();
+}
+
+SIM900PhonebookCapacity SIM900::phonebookCapacity() {
+    SIM900PhonebookCapacity capacity;
+    capacity.used = capacity.max = 0;
+    capacity.memoryType = F("");
+
+    this->sendCommand("AT+CPBS?");
+
+    String response = this->queryResult();
+    uint8_t delim1 = response.indexOf(','),
+        delim2 = response.indexOf(',', delim1 + 1);
+
+    capacity.memoryType = response.substring(1, delim1 - 1);
+    capacity.used = (uint8_t) response.substring(delim1 + 1, delim2).toInt();
+    capacity.max = (uint8_t) response.substring(delim2 + 1).toInt();
+
+    return capacity;
 }
 
 SIM900CardAccount SIM900::cardNumber() {
