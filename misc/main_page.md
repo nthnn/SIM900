@@ -2,7 +2,7 @@
 @tableofcontents
 
 ![Arduino CI](https://github.com/nthnn/SIM900/actions/workflows/arduino_ci.yml/badge.svg) ![Arduino Lint](https://github.com/nthnn/SIM900/actions/workflows/arduino_lint.yml/badge.svg)
-![Arduino Release](https://img.shields.io/badge/Library%20Manager-None-red?logo=Arduino)
+![Arduino Release](https://img.shields.io/badge/Library%20Manager-1.0.0-red?logo=Arduino)
 [![License: LGPL3.0](https://img.shields.io/badge/License-LGPL3.0-yellow.svg)](https://github.com/nthnn/SIM900/blob/main/LICENSE)
 
 The %SIM900 Arduino Shield Library is a versatile and powerful Arduino library for interfacing with the %SIM900 GSM/GPRS module. This library provides a wide range of functionalities for working with the %SIM900 module, including sending and receiving calls, sending and receiving SMS, updating and extracting real-time clock data, sending HTTP requests, and retrieving various information about the %SIM900 module's status and the network it is connected to.
