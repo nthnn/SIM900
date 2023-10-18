@@ -9,6 +9,7 @@
 class SIM900 {
 private:
     SoftwareSerial *sim900;
+    bool hasAPN = false;
 
     void sendCommand(String message);
     bool isSuccessCommand();

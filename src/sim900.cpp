@@ -165,6 +165,72 @@ SIM900Operator SIM900::networkOperator() {
     return simOperator;
 }
 
+bool SIM900::connectAPN(SIM900APN apn) {
+    this->sendCommand(F("AT+CMGF=1"));
+    if(!this->isSuccessCommand())
+        return false;
+
+    this->sendCommand(F("AT+CGATT=1"));
+    if(!this->isSuccessCommand())
+        return false;
+    
+    this->sendCommand(
+        "AT+CSTT=\"" + apn.apn +
+        "\",\"" + apn.username +
+        "\",\"" + apn.password + "\""
+    );
+
+    return (this->hasAPN = this->isSuccessCommand());
+}
+
+bool SIM900::enableGPRS() {
+    this->sendCommand(F("AT+CIICR"));
+    delay(1000);
+
+    return this->isSuccessCommand();
+}
+
+SIM900HTTPResponse SIM900::request(SIM900HTTPRequest request) {
+    SIM900HTTPResponse response;
+    response.status = -1;
+
+    this->sendCommand(
+        "AT+CIPSTART=\"TCP\",\"" + request.domain +
+        "\"," + String(request.port)
+    );
+    if(!this->isSuccessCommand())
+        return response;
+    
+    String resp = this->getResponse();
+    resp.trim();
+
+    if(resp != "CONNECT OK")
+        return response;
+
+    String requestStr = request.method + " " +
+        request.resource + " HTTP/1.0\r\nHost: " +
+        request.domain + "\r\n";
+
+    for(int i = 0; i < request.header_count; i++)
+        requestStr += request.headers[i].key + ": " +
+            request.headers[i].value + "\r\n";
+
+    if(request.data != "" || request.data != NULL)
+        requestStr += request.data;
+    requestStr += "\r\n\r\n";
+
+    this->sendCommand(requestStr);
+    Serial.println(requestStr);
+
+    String read = "";
+    while(!read.endsWith("DEACT")) {
+        read = this->getResponse();
+        Serial.println("-> " + read);
+    }
+
+    return response;
+}
+
 bool SIM900::updateRtc(SIM900RTC config) {
     this->sendCommand(
         "AT+CCLK=\"" + String(config.year <= 9 ? "0" : "") + String(config.year) +
@@ -241,5 +307,10 @@ String SIM900::chipModel() {
 
 String SIM900::chipName() {
     this->sendCommand(F("AT+GOI"));
+    return this->rawQueryOnLine(2);
+}
+
+String SIM900::ipAddress() {
+    this->sendCommand(F("AT+CIFSR"));
     return this->rawQueryOnLine(2);
 }
