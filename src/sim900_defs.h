@@ -38,6 +38,12 @@ typedef enum _SIM900CardService {
     SIM900_CARD_SERVICE_FAX
 } SIM900CardService;
 
+typedef enum _SIM900PhonebookType {
+    SIM900_PHONEBOOK_NATIONAL       = 145,
+    SIM900_PHONEBOOK_INTERNATIONAL  = 129,
+    SIM900_PHONEBOOK_UNKNOWN        = 0
+} SIM900PhonebookType;
+
 typedef struct _SIM900Operator {
     SIM900OperatorMode mode;
     SIM900OperatorFormat format;
@@ -77,6 +83,7 @@ typedef struct _SIM900HTTPResponse {
 typedef struct _SIM900CardAccount {
     String name, number;
     uint8_t type, speed;
+    SIM900PhonebookType numberType;
     SIM900CardService service;
 } SIM900CardAccount;
 

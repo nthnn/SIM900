@@ -42,6 +42,9 @@ public:
     SIM900RTC rtc();
     bool updateRtc(SIM900RTC config);
 
+    bool savePhonebook(uint8_t index, SIM900CardAccount account);
+    SIM900CardAccount retrievePhonebook(uint8_t index);
+
     String manufacturer();
     String softwareRelease();
     String imei();

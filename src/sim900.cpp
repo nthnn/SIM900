@@ -280,6 +280,39 @@ SIM900RTC SIM900::rtc() {
     return rtc; 
 }
 
+bool SIM900::savePhonebook(uint8_t index, SIM900CardAccount account) {
+    this->sendCommand(
+        "AT+CPBW=" + String(index) +
+        ",\"" + account.number +
+        "\"," + account.numberType +
+        ",\"" + account.name + "\""
+    );
+    return this->isSuccessCommand();
+}
+
+SIM900CardAccount SIM900::retrievePhonebook(uint8_t index) {
+    this->sendCommand("AT+CPBR=" + String(index));
+
+    SIM900CardAccount accountInfo;
+    accountInfo.numberType = 0;
+
+    String response = this->queryResult();
+    response = response.substring(response.indexOf(',') + 1);
+
+    uint8_t delim1 = response.indexOf(','),
+        delim2 = response.indexOf(',', delim1 + 1);
+
+    accountInfo.number = response.substring(1, delim1 - 1);
+    
+    uint8_t type = (uint8_t) response.substring(delim1 + 1, delim2).toInt();
+    if(type == 129 || type == 145)
+        accountInfo.numberType = type;
+    else accountInfo.numberType = 0;
+
+    accountInfo.name = response.substring(delim2 + 2, response.length() - 2);
+    return accountInfo;
+}
+
 SIM900CardAccount SIM900::cardNumber() {
     this->sendCommand(F("AT+CNUM"));
 
@@ -300,6 +333,7 @@ SIM900CardAccount SIM900::cardNumber() {
     account.type = (uint8_t) response.substring(delim2 + 1, delim3).toInt();
     account.speed = (uint8_t) response.substring(delim3 + 1, delim4).toInt();
     account.service = (uint8_t) response.substring(delim4 + 1).toInt();
+    account.numberType = 0;
 
     return account;
 }

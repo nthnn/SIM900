@@ -6,26 +6,41 @@ SoftwareSerial shieldSerial(7, 8);
 void setup() {
   Serial.begin(9600);
   SIM900 sim900(&shieldSerial);
+  uint8_t phonebookIndex = 1;
 
-  Serial.println(F("Dumping SIM card informations..."));
-  Serial.println(F("-----------------------------------------"));
+  SIM900CardAccount accountInfo;
+  accountInfo.name = "Nathanne Isip";
+  accountInfo.number = "00000000000";
+  accountInfo.numberType = SIM900_PHONEBOOK_INTERNATIONAL;
 
-  SIM900CardAccount accountInfo = sim900.cardNumber();
+  Serial.println(F("Storing a phonebook account..."));
+  sim900.savePhonebook(phonebookIndex, accountInfo);
+  Serial.println(F("Account stored!"));
 
-  Serial.print(F("Name:\t\t"));
-  Serial.println(accountInfo.name);
+  SIM900CardAccount retrieved = sim900.retrievePhonebook(phonebookIndex);
+  Serial.println(F("Retrieving phonebook..."));
+  Serial.println(F("-----------------------"));
 
-  Serial.print(F("Number:\t\t"));
-  Serial.println(accountInfo.number);
+  Serial.print(F("Name: "));
+  Serial.println(retrieved.name);
 
-  Serial.print(F("Type:\t\t"));
-  Serial.println(accountInfo.type);
+  Serial.print(F("Number: "));
+  Serial.println(retrieved.number);
 
-  Serial.print(F("Speed:\t\t"));
-  Serial.println(accountInfo.speed);
+  Serial.print(F("Number type: "));
+  switch(retrieved.numberType) {
+    case 129:
+      Serial.println(F("International"));
+      break;
 
-  Serial.print(F("Service:\t"));
-  Serial.println(accountInfo.service);
+    case 145:
+      Serial.println(F("National"));
+      break;
+
+    default:
+      Serial.println(F("Unknown"));
+      break;
+  }
 }
 
 void loop() { }
