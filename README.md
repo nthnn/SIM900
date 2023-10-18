@@ -17,6 +17,8 @@ The SIM900 Arduino Shield Library is a versatile and powerful Arduino library fo
     </tr>
 </table>
 
+> **Note:** The `SIM900::request(SIM900HTTPRequest)` function is still underdevelopment.
+
 ## Features
 
 - **Call Handling**: Make and receive calls with ease.
