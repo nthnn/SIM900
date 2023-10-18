@@ -98,27 +98,267 @@ $(document).ready(function(){initNavTree('sim900__defs_8h_source.html',''); init
   <div class="headertitle"><div class="title">sim900_defs.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SIM900_DEFS_H</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SIM900_DEFS_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">typedef</span> <span class="keyword">enum</span> _SIM900DialResult {</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>  SIM900_DIAL_RESULT_NO_DIALTONE,</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>  SIM900_DIAL_RESULT_BUSY,</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>  SIM900_DIAL_RESULT_NO_CARRIER,</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  SIM900_DIAL_RESULT_NO_ANSWER,</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>  SIM900_DIAL_RESULT_ERROR,</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>  SIM900_DIAL_RESULT_OK</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>} SIM900DialResult;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="struct__SIM900Operator.html">   13</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__SIM900Operator.html">_SIM900Operator</a> {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  uint16_t status, format;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  String name;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>} <a class="code hl_struct" href="struct__SIM900Operator.html">SIM900Operator</a>;</div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * This file is part of the SIM900 Arduino Shield library.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * Copyright (c) 2023 Nathanne Isip</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * in the Software without restriction, including without limitation the rights</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> * copies of the Software, and to permit persons to whom the Software is</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> * furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> * The above copyright notice and this permission notice shall be included in</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> * all copies or substantial portions of the Software.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * THE SOFTWARE.</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#ifndef SIM900_DEFS_H</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#define SIM900_DEFS_H</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">typedef</span> <span class="keyword">enum</span> _SIM900DialResult {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    SIM900_DIAL_RESULT_NO_DIALTONE,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    SIM900_DIAL_RESULT_BUSY,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    SIM900_DIAL_RESULT_NO_CARRIER,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    SIM900_DIAL_RESULT_NO_ANSWER,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    SIM900_DIAL_RESULT_ERROR,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    SIM900_DIAL_RESULT_OK</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>} SIM900DialResult;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">typedef</span> <span class="keyword">enum</span> _SIM900OperatorFormat {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    SIM900_OPERATOR_FORMAT_AUTO,</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    SIM900_OPERATOR_FORMAT_MANUAL,</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    SIM900_OPERATOR_FORMAT_DEREGISTER,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    SIM900_OPERATOR_FORMAT_SET_ONLY,</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    SIM900_OPERATOR_FORMAT_MANUAL_AUTO</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>} SIM900OperatorFormat;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">typedef</span> <span class="keyword">enum</span> _SIM900OperatorMode {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    SIM900_OPERATOR_MODE_GSM,</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    SIM900_OPERATOR_MODE_GSM_COMPACT,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    SIM900_OPERATOR_MODE_UTRAN,</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    SIM900_OPERATOR_MODE_GSM_EGPRS,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    SIM900_OPERATOR_MODE_UTRAN_HSDPA,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    SIM900_OPERATOR_MODE_UTRAN_HSUPA,</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    SIM900_OPERATOR_MODE_UTRAN_HSDPA_HSUPA,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    SIM900_OPERATOR_MODE_E_UTRAN</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>} SIM900OperatorMode;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="keyword">typedef</span> <span class="keyword">enum</span> _SIM900CardService {</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    SIM900_CARD_SERVICE_ASYNC,</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    SIM900_CARD_SERVICE_SYNC,</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    SIM900_CARD_SERVICE_PAD_ACCESS,</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    SIM900_CARD_SERVICE_PACKET,</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    SIM900_CARD_SERVICE_VOICE,</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    SIM900_CARD_SERVICE_FAX</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>} SIM900CardService;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="keyword">typedef</span> <span class="keyword">enum</span> _SIM900PhonebookType {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    SIM900_PHONEBOOK_NATIONAL       = 145,</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    SIM900_PHONEBOOK_INTERNATIONAL  = 129,</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    SIM900_PHONEBOOK_UNKNOWN        = 0</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>} SIM900PhonebookType;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="foldopen" id="foldopen00181" data-start="{" data-end="};">
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno"><a class="line" href="struct__SIM900Operator.html">  181</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__SIM900Operator.html">_SIM900Operator</a> {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="struct__SIM900Operator.html#adda7da1bdc928d3966f55236ff535019">  183</a></span>    SIM900OperatorMode <a class="code hl_variable" href="struct__SIM900Operator.html#adda7da1bdc928d3966f55236ff535019">mode</a>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="struct__SIM900Operator.html#a2f25d73d2d0ee90b8b846f768edfc460">  186</a></span>    SIM900OperatorFormat <a class="code hl_variable" href="struct__SIM900Operator.html#a2f25d73d2d0ee90b8b846f768edfc460">format</a>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="struct__SIM900Operator.html#a8deabc0f0649a80758331b48a3fa8ea3">  189</a></span>    String <a class="code hl_variable" href="struct__SIM900Operator.html#a8deabc0f0649a80758331b48a3fa8ea3">name</a>;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>} <a class="code hl_struct" href="structSIM900Operator.html">SIM900Operator</a>;</div>
 </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="astruct__SIM900Operator_html"><div class="ttname"><a href="struct__SIM900Operator.html">_SIM900Operator</a></div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00013">sim900_defs.h:13</a></div></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="foldopen" id="foldopen00200" data-start="{" data-end="};">
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="struct__SIM900RTC.html">  200</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__SIM900RTC.html">_SIM900RTC</a> {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno"><a class="line" href="struct__SIM900RTC.html#acfa5cb161130bfb6295cd30d42ce8e92">  202</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900RTC.html#acfa5cb161130bfb6295cd30d42ce8e92">day</a>;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="struct__SIM900RTC.html#ad17c282a5c9d8519109d31598ef5788e">  205</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900RTC.html#ad17c282a5c9d8519109d31598ef5788e">month</a>;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno"><a class="line" href="struct__SIM900RTC.html#a7dad2cc09f5dc9d68b14d7aff4e41cd2">  208</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900RTC.html#a7dad2cc09f5dc9d68b14d7aff4e41cd2">year</a>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno"><a class="line" href="struct__SIM900RTC.html#addf611f4136279653bd46e1c3e2bc5f4">  211</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900RTC.html#addf611f4136279653bd46e1c3e2bc5f4">hour</a>;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="struct__SIM900RTC.html#a0d823127f398e37acbf8a7881d1e15ea">  214</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900RTC.html#a0d823127f398e37acbf8a7881d1e15ea">minute</a>;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="struct__SIM900RTC.html#ad9c01a85f03675692df19b3abf7f553e">  217</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900RTC.html#ad9c01a85f03675692df19b3abf7f553e">second</a>;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno"><a class="line" href="struct__SIM900RTC.html#a178169babe83108c56e5615be62cbf2c">  220</a></span>    int8_t <a class="code hl_variable" href="struct__SIM900RTC.html#a178169babe83108c56e5615be62cbf2c">gmt</a>;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>} <a class="code hl_struct" href="structSIM900RTC.html">SIM900RTC</a>;</div>
+</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="foldopen" id="foldopen00231" data-start="{" data-end="};">
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="struct__SIM900APN.html">  231</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__SIM900APN.html">_SIM900APN</a> {</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="struct__SIM900APN.html#a8a7746017c4a1a214f2561af65336eba">  233</a></span>    String <a class="code hl_variable" href="struct__SIM900APN.html#a8a7746017c4a1a214f2561af65336eba">apn</a>;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="struct__SIM900APN.html#a6abf9f112964f3b1dee338651caf53ce">  236</a></span>    String <a class="code hl_variable" href="struct__SIM900APN.html#a6abf9f112964f3b1dee338651caf53ce">username</a>;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno"><a class="line" href="struct__SIM900APN.html#a8b8f33d218886cbbe85ae1b53b784a15">  239</a></span>    String <a class="code hl_variable" href="struct__SIM900APN.html#a8b8f33d218886cbbe85ae1b53b784a15">password</a>;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>} <a class="code hl_struct" href="structSIM900APN.html">SIM900APN</a>;</div>
+</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="foldopen" id="foldopen00250" data-start="{" data-end="};">
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPHeader.html">  250</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__SIM900HTTPHeader.html">_SIM900HTTPHeader</a> {</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPHeader.html#aea8b0b1471722c2135ba6e7c017b613b">  252</a></span>    String <a class="code hl_variable" href="struct__SIM900HTTPHeader.html#aea8b0b1471722c2135ba6e7c017b613b">key</a>;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPHeader.html#a0bd66115b0a1dfbac67e43b8047a13af">  255</a></span>    String <a class="code hl_variable" href="struct__SIM900HTTPHeader.html#a0bd66115b0a1dfbac67e43b8047a13af">value</a>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>} <a class="code hl_struct" href="structSIM900HTTPHeader.html">SIM900HTTPHeader</a>;</div>
+</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="foldopen" id="foldopen00267" data-start="{" data-end="};">
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPRequest.html">  267</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__SIM900HTTPRequest.html">_SIM900HTTPRequest</a> {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPRequest.html#ac00844f24fef29c087be550e5b848525">  269</a></span>    String <a class="code hl_variable" href="struct__SIM900HTTPRequest.html#ac00844f24fef29c087be550e5b848525">method</a>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPRequest.html#a127e19fc9b2a933115024e00bbef9976">  272</a></span>    String <a class="code hl_variable" href="struct__SIM900HTTPRequest.html#a127e19fc9b2a933115024e00bbef9976">data</a>;</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPRequest.html#a50b7a5b6b931ce36cbd90197d338bb68">  275</a></span>    String <a class="code hl_variable" href="struct__SIM900HTTPRequest.html#a50b7a5b6b931ce36cbd90197d338bb68">domain</a>;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPRequest.html#a18e7a840affe806f78fe54000f08c7e4">  278</a></span>    String <a class="code hl_variable" href="struct__SIM900HTTPRequest.html#a18e7a840affe806f78fe54000f08c7e4">resource</a>;</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPRequest.html#adfd044129cb97e7a50180dae90b435f7">  281</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900HTTPRequest.html#adfd044129cb97e7a50180dae90b435f7">status</a>;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> </div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPRequest.html#a8b3c0467b7c5f464f9a82a7cc028f414">  284</a></span>    uint16_t <a class="code hl_variable" href="struct__SIM900HTTPRequest.html#a8b3c0467b7c5f464f9a82a7cc028f414">port</a>;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPRequest.html#a8a389068aeea54cb5fcc4d9017235b50">  287</a></span>    <a class="code hl_struct" href="struct__SIM900HTTPHeader.html">SIM900HTTPHeader</a> *<a class="code hl_variable" href="struct__SIM900HTTPRequest.html#a8a389068aeea54cb5fcc4d9017235b50">headers</a>;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPRequest.html#a3aba184137d606406632eda387085d1a">  290</a></span>    uint16_t <a class="code hl_variable" href="struct__SIM900HTTPRequest.html#a3aba184137d606406632eda387085d1a">header_count</a>;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>} <a class="code hl_struct" href="structSIM900HTTPRequest.html">SIM900HTTPRequest</a>;</div>
+</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
+<div class="foldopen" id="foldopen00302" data-start="{" data-end="};">
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPResponse.html">  302</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__SIM900HTTPResponse.html">_SIM900HTTPResponse</a> {</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPResponse.html#ab3d672e8ca25d5f7fb83a90edcd37b86">  304</a></span>    uint16_t <a class="code hl_variable" href="struct__SIM900HTTPResponse.html#ab3d672e8ca25d5f7fb83a90edcd37b86">status</a>;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPResponse.html#a5394ee859135bd718758b9783247be0a">  307</a></span>    <a class="code hl_struct" href="struct__SIM900HTTPHeader.html">SIM900HTTPHeader</a> *<a class="code hl_variable" href="struct__SIM900HTTPResponse.html#a5394ee859135bd718758b9783247be0a">headers</a>;</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPResponse.html#a7bf8ed67fcdf8df04bad9034486383e7">  310</a></span>    uint16_t <a class="code hl_variable" href="struct__SIM900HTTPResponse.html#a7bf8ed67fcdf8df04bad9034486383e7">header_count</a>;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno"><a class="line" href="struct__SIM900HTTPResponse.html#a48f0e871df50c2d111ed30e8411dcc33">  313</a></span>    String <a class="code hl_variable" href="struct__SIM900HTTPResponse.html#a48f0e871df50c2d111ed30e8411dcc33">data</a>;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>} <a class="code hl_struct" href="structSIM900HTTPResponse.html">SIM900HTTPResponse</a>;</div>
+</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
+<div class="foldopen" id="foldopen00325" data-start="{" data-end="};">
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno"><a class="line" href="struct__SIM900CardAccount.html">  325</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__SIM900CardAccount.html">_SIM900CardAccount</a> {</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno"><a class="line" href="struct__SIM900CardAccount.html#a204992955eb0496f464a1f4ec179c5d6">  327</a></span>    String <a class="code hl_variable" href="struct__SIM900CardAccount.html#a204992955eb0496f464a1f4ec179c5d6">name</a>;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    </div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="struct__SIM900CardAccount.html#ada9fce04d815f0d450212bd2bf4aaa15">  330</a></span>    String <a class="code hl_variable" href="struct__SIM900CardAccount.html#ada9fce04d815f0d450212bd2bf4aaa15">number</a>;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno"><a class="line" href="struct__SIM900CardAccount.html#a015e27dd78b90a870728552358914d63">  333</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900CardAccount.html#a015e27dd78b90a870728552358914d63">type</a>;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    </div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno"><a class="line" href="struct__SIM900CardAccount.html#a9aac71361be2c17da5e0c45993635172">  336</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900CardAccount.html#a9aac71361be2c17da5e0c45993635172">speed</a>;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno"><a class="line" href="struct__SIM900CardAccount.html#a7c50ef285032d36d51a7270dc10fd2c1">  339</a></span>    SIM900PhonebookType <a class="code hl_variable" href="struct__SIM900CardAccount.html#a7c50ef285032d36d51a7270dc10fd2c1">numberType</a>;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno"><a class="line" href="struct__SIM900CardAccount.html#a3f36ba9cc8f894b944fe17fa8b68b3a8">  342</a></span>    SIM900CardService <a class="code hl_variable" href="struct__SIM900CardAccount.html#a3f36ba9cc8f894b944fe17fa8b68b3a8">service</a>;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>} <a class="code hl_struct" href="structSIM900CardAccount.html">SIM900CardAccount</a>;</div>
+</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span> </div>
+<div class="foldopen" id="foldopen00354" data-start="{" data-end="};">
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno"><a class="line" href="struct__SIM900PhonebookCapacity.html">  354</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__SIM900PhonebookCapacity.html">_SIM900PhonebookCapacity</a> {</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno"><a class="line" href="struct__SIM900PhonebookCapacity.html#abe8204ae6aae032bd6884558f9c60ca2">  356</a></span>    String <a class="code hl_variable" href="struct__SIM900PhonebookCapacity.html#abe8204ae6aae032bd6884558f9c60ca2">memoryType</a>;</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span> </div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno"><a class="line" href="struct__SIM900PhonebookCapacity.html#a14ca906676be2804c1a1b9cc36bd1a69">  359</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900PhonebookCapacity.html#a14ca906676be2804c1a1b9cc36bd1a69">used</a>;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno"><a class="line" href="struct__SIM900PhonebookCapacity.html#a91c3379f4d3e1c39c98ff3cdc7b3d77e">  362</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900PhonebookCapacity.html#a91c3379f4d3e1c39c98ff3cdc7b3d77e">max</a>;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>} <a class="code hl_struct" href="structSIM900PhonebookCapacity.html">SIM900PhonebookCapacity</a>;</div>
+</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
+<div class="foldopen" id="foldopen00374" data-start="{" data-end="};">
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno"><a class="line" href="struct__SIM900Signal.html">  374</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="struct__SIM900Signal.html">_SIM900Signal</a> {</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno"><a class="line" href="struct__SIM900Signal.html#aebdba9eecb29f181914c58d278639a6e">  376</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900Signal.html#aebdba9eecb29f181914c58d278639a6e">rssi</a>;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno"><a class="line" href="struct__SIM900Signal.html#af66531bdf2168f9f2ab15a06b4a8014b">  379</a></span>    uint8_t <a class="code hl_variable" href="struct__SIM900Signal.html#af66531bdf2168f9f2ab15a06b4a8014b">bit_error_rate</a>;</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>} <a class="code hl_struct" href="structSIM900Signal.html">SIM900Signal</a>;</div>
+</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="astructSIM900APN_html"><div class="ttname"><a href="structSIM900APN.html">SIM900APN</a></div><div class="ttdoc">A structure representing Access Point Name (APN) configuration for mobile data.</div></div>
+<div class="ttc" id="astructSIM900CardAccount_html"><div class="ttname"><a href="structSIM900CardAccount.html">SIM900CardAccount</a></div><div class="ttdoc">A structure representing a card account, including name, number, type, and service information.</div></div>
+<div class="ttc" id="astructSIM900HTTPHeader_html"><div class="ttname"><a href="structSIM900HTTPHeader.html">SIM900HTTPHeader</a></div><div class="ttdoc">A structure representing an HTTP header key-value pair.</div></div>
+<div class="ttc" id="astructSIM900HTTPRequest_html"><div class="ttname"><a href="structSIM900HTTPRequest.html">SIM900HTTPRequest</a></div><div class="ttdoc">A structure representing an HTTP request.</div></div>
+<div class="ttc" id="astructSIM900HTTPResponse_html"><div class="ttname"><a href="structSIM900HTTPResponse.html">SIM900HTTPResponse</a></div><div class="ttdoc">A structure representing an HTTP response.</div></div>
+<div class="ttc" id="astructSIM900Operator_html"><div class="ttname"><a href="structSIM900Operator.html">SIM900Operator</a></div><div class="ttdoc">A structure representing mobile network operator information.</div></div>
+<div class="ttc" id="astructSIM900PhonebookCapacity_html"><div class="ttname"><a href="structSIM900PhonebookCapacity.html">SIM900PhonebookCapacity</a></div><div class="ttdoc">A structure representing the capacity of a phonebook memory type.</div></div>
+<div class="ttc" id="astructSIM900RTC_html"><div class="ttname"><a href="structSIM900RTC.html">SIM900RTC</a></div><div class="ttdoc">A structure representing real-time clock (RTC) information.</div></div>
+<div class="ttc" id="astructSIM900Signal_html"><div class="ttname"><a href="structSIM900Signal.html">SIM900Signal</a></div><div class="ttdoc">A structure representing signal strength and bit error rate information.</div></div>
+<div class="ttc" id="astruct__SIM900APN_html"><div class="ttname"><a href="struct__SIM900APN.html">_SIM900APN</a></div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00231">sim900_defs.h:231</a></div></div>
+<div class="ttc" id="astruct__SIM900APN_html_a6abf9f112964f3b1dee338651caf53ce"><div class="ttname"><a href="struct__SIM900APN.html#a6abf9f112964f3b1dee338651caf53ce">_SIM900APN::username</a></div><div class="ttdeci">String username</div><div class="ttdoc">The username for APN authentication.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00236">sim900_defs.h:236</a></div></div>
+<div class="ttc" id="astruct__SIM900APN_html_a8a7746017c4a1a214f2561af65336eba"><div class="ttname"><a href="struct__SIM900APN.html#a8a7746017c4a1a214f2561af65336eba">_SIM900APN::apn</a></div><div class="ttdeci">String apn</div><div class="ttdoc">The Access Point Name (APN) for data connectivity.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00233">sim900_defs.h:233</a></div></div>
+<div class="ttc" id="astruct__SIM900APN_html_a8b8f33d218886cbbe85ae1b53b784a15"><div class="ttname"><a href="struct__SIM900APN.html#a8b8f33d218886cbbe85ae1b53b784a15">_SIM900APN::password</a></div><div class="ttdeci">String password</div><div class="ttdoc">The password for APN authentication.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00239">sim900_defs.h:239</a></div></div>
+<div class="ttc" id="astruct__SIM900CardAccount_html"><div class="ttname"><a href="struct__SIM900CardAccount.html">_SIM900CardAccount</a></div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00325">sim900_defs.h:325</a></div></div>
+<div class="ttc" id="astruct__SIM900CardAccount_html_a015e27dd78b90a870728552358914d63"><div class="ttname"><a href="struct__SIM900CardAccount.html#a015e27dd78b90a870728552358914d63">_SIM900CardAccount::type</a></div><div class="ttdeci">uint8_t type</div><div class="ttdoc">The card's type (e.g., SIM card).</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00333">sim900_defs.h:333</a></div></div>
+<div class="ttc" id="astruct__SIM900CardAccount_html_a204992955eb0496f464a1f4ec179c5d6"><div class="ttname"><a href="struct__SIM900CardAccount.html#a204992955eb0496f464a1f4ec179c5d6">_SIM900CardAccount::name</a></div><div class="ttdeci">String name</div><div class="ttdoc">The name associated with the card account.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00327">sim900_defs.h:327</a></div></div>
+<div class="ttc" id="astruct__SIM900CardAccount_html_a3f36ba9cc8f894b944fe17fa8b68b3a8"><div class="ttname"><a href="struct__SIM900CardAccount.html#a3f36ba9cc8f894b944fe17fa8b68b3a8">_SIM900CardAccount::service</a></div><div class="ttdeci">SIM900CardService service</div><div class="ttdoc">The type of card service (e.g., voice, data) associated with the card account.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00342">sim900_defs.h:342</a></div></div>
+<div class="ttc" id="astruct__SIM900CardAccount_html_a7c50ef285032d36d51a7270dc10fd2c1"><div class="ttname"><a href="struct__SIM900CardAccount.html#a7c50ef285032d36d51a7270dc10fd2c1">_SIM900CardAccount::numberType</a></div><div class="ttdeci">SIM900PhonebookType numberType</div><div class="ttdoc">The type of phonebook (national, international) where the number is stored.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00339">sim900_defs.h:339</a></div></div>
+<div class="ttc" id="astruct__SIM900CardAccount_html_a9aac71361be2c17da5e0c45993635172"><div class="ttname"><a href="struct__SIM900CardAccount.html#a9aac71361be2c17da5e0c45993635172">_SIM900CardAccount::speed</a></div><div class="ttdeci">uint8_t speed</div><div class="ttdoc">The card's speed or data rate.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00336">sim900_defs.h:336</a></div></div>
+<div class="ttc" id="astruct__SIM900CardAccount_html_ada9fce04d815f0d450212bd2bf4aaa15"><div class="ttname"><a href="struct__SIM900CardAccount.html#ada9fce04d815f0d450212bd2bf4aaa15">_SIM900CardAccount::number</a></div><div class="ttdeci">String number</div><div class="ttdoc">The card's phone number.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00330">sim900_defs.h:330</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPHeader_html"><div class="ttname"><a href="struct__SIM900HTTPHeader.html">_SIM900HTTPHeader</a></div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00250">sim900_defs.h:250</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPHeader_html_a0bd66115b0a1dfbac67e43b8047a13af"><div class="ttname"><a href="struct__SIM900HTTPHeader.html#a0bd66115b0a1dfbac67e43b8047a13af">_SIM900HTTPHeader::value</a></div><div class="ttdeci">String value</div><div class="ttdoc">The header field value.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00255">sim900_defs.h:255</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPHeader_html_aea8b0b1471722c2135ba6e7c017b613b"><div class="ttname"><a href="struct__SIM900HTTPHeader.html#aea8b0b1471722c2135ba6e7c017b613b">_SIM900HTTPHeader::key</a></div><div class="ttdeci">String key</div><div class="ttdoc">The header field key.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00252">sim900_defs.h:252</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPRequest_html"><div class="ttname"><a href="struct__SIM900HTTPRequest.html">_SIM900HTTPRequest</a></div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00267">sim900_defs.h:267</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPRequest_html_a127e19fc9b2a933115024e00bbef9976"><div class="ttname"><a href="struct__SIM900HTTPRequest.html#a127e19fc9b2a933115024e00bbef9976">_SIM900HTTPRequest::data</a></div><div class="ttdeci">String data</div><div class="ttdoc">The data to be included in the request (e.g., POST data).</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00272">sim900_defs.h:272</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPRequest_html_a18e7a840affe806f78fe54000f08c7e4"><div class="ttname"><a href="struct__SIM900HTTPRequest.html#a18e7a840affe806f78fe54000f08c7e4">_SIM900HTTPRequest::resource</a></div><div class="ttdeci">String resource</div><div class="ttdoc">The resource or URL path to access on the server.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00278">sim900_defs.h:278</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPRequest_html_a3aba184137d606406632eda387085d1a"><div class="ttname"><a href="struct__SIM900HTTPRequest.html#a3aba184137d606406632eda387085d1a">_SIM900HTTPRequest::header_count</a></div><div class="ttdeci">uint16_t header_count</div><div class="ttdoc">The number of HTTP headers in the array.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00290">sim900_defs.h:290</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPRequest_html_a50b7a5b6b931ce36cbd90197d338bb68"><div class="ttname"><a href="struct__SIM900HTTPRequest.html#a50b7a5b6b931ce36cbd90197d338bb68">_SIM900HTTPRequest::domain</a></div><div class="ttdeci">String domain</div><div class="ttdoc">The domain or server to which the request is sent.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00275">sim900_defs.h:275</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPRequest_html_a8a389068aeea54cb5fcc4d9017235b50"><div class="ttname"><a href="struct__SIM900HTTPRequest.html#a8a389068aeea54cb5fcc4d9017235b50">_SIM900HTTPRequest::headers</a></div><div class="ttdeci">SIM900HTTPHeader * headers</div><div class="ttdoc">An array of HTTP headers associated with the request.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00287">sim900_defs.h:287</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPRequest_html_a8b3c0467b7c5f464f9a82a7cc028f414"><div class="ttname"><a href="struct__SIM900HTTPRequest.html#a8b3c0467b7c5f464f9a82a7cc028f414">_SIM900HTTPRequest::port</a></div><div class="ttdeci">uint16_t port</div><div class="ttdoc">The port on which the server is listening (e.g., 80 for HTTP).</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00284">sim900_defs.h:284</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPRequest_html_ac00844f24fef29c087be550e5b848525"><div class="ttname"><a href="struct__SIM900HTTPRequest.html#ac00844f24fef29c087be550e5b848525">_SIM900HTTPRequest::method</a></div><div class="ttdeci">String method</div><div class="ttdoc">The HTTP method for the request (e.g., GET, POST).</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00269">sim900_defs.h:269</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPRequest_html_adfd044129cb97e7a50180dae90b435f7"><div class="ttname"><a href="struct__SIM900HTTPRequest.html#adfd044129cb97e7a50180dae90b435f7">_SIM900HTTPRequest::status</a></div><div class="ttdeci">uint8_t status</div><div class="ttdoc">The status of the HTTP request.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00281">sim900_defs.h:281</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPResponse_html"><div class="ttname"><a href="struct__SIM900HTTPResponse.html">_SIM900HTTPResponse</a></div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00302">sim900_defs.h:302</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPResponse_html_a48f0e871df50c2d111ed30e8411dcc33"><div class="ttname"><a href="struct__SIM900HTTPResponse.html#a48f0e871df50c2d111ed30e8411dcc33">_SIM900HTTPResponse::data</a></div><div class="ttdeci">String data</div><div class="ttdoc">The data received in the HTTP response, such as HTML content or JSON data.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00313">sim900_defs.h:313</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPResponse_html_a5394ee859135bd718758b9783247be0a"><div class="ttname"><a href="struct__SIM900HTTPResponse.html#a5394ee859135bd718758b9783247be0a">_SIM900HTTPResponse::headers</a></div><div class="ttdeci">SIM900HTTPHeader * headers</div><div class="ttdoc">An array of HTTP headers included in the response.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00307">sim900_defs.h:307</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPResponse_html_a7bf8ed67fcdf8df04bad9034486383e7"><div class="ttname"><a href="struct__SIM900HTTPResponse.html#a7bf8ed67fcdf8df04bad9034486383e7">_SIM900HTTPResponse::header_count</a></div><div class="ttdeci">uint16_t header_count</div><div class="ttdoc">The number of HTTP headers in the array.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00310">sim900_defs.h:310</a></div></div>
+<div class="ttc" id="astruct__SIM900HTTPResponse_html_ab3d672e8ca25d5f7fb83a90edcd37b86"><div class="ttname"><a href="struct__SIM900HTTPResponse.html#ab3d672e8ca25d5f7fb83a90edcd37b86">_SIM900HTTPResponse::status</a></div><div class="ttdeci">uint16_t status</div><div class="ttdoc">The HTTP status code of the response.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00304">sim900_defs.h:304</a></div></div>
+<div class="ttc" id="astruct__SIM900Operator_html"><div class="ttname"><a href="struct__SIM900Operator.html">_SIM900Operator</a></div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00181">sim900_defs.h:181</a></div></div>
+<div class="ttc" id="astruct__SIM900Operator_html_a2f25d73d2d0ee90b8b846f768edfc460"><div class="ttname"><a href="struct__SIM900Operator.html#a2f25d73d2d0ee90b8b846f768edfc460">_SIM900Operator::format</a></div><div class="ttdeci">SIM900OperatorFormat format</div><div class="ttdoc">The operator selection format.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00186">sim900_defs.h:186</a></div></div>
+<div class="ttc" id="astruct__SIM900Operator_html_a8deabc0f0649a80758331b48a3fa8ea3"><div class="ttname"><a href="struct__SIM900Operator.html#a8deabc0f0649a80758331b48a3fa8ea3">_SIM900Operator::name</a></div><div class="ttdeci">String name</div><div class="ttdoc">The name of the mobile network operator.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00189">sim900_defs.h:189</a></div></div>
+<div class="ttc" id="astruct__SIM900Operator_html_adda7da1bdc928d3966f55236ff535019"><div class="ttname"><a href="struct__SIM900Operator.html#adda7da1bdc928d3966f55236ff535019">_SIM900Operator::mode</a></div><div class="ttdeci">SIM900OperatorMode mode</div><div class="ttdoc">The operating mode of the mobile network operator.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00183">sim900_defs.h:183</a></div></div>
+<div class="ttc" id="astruct__SIM900PhonebookCapacity_html"><div class="ttname"><a href="struct__SIM900PhonebookCapacity.html">_SIM900PhonebookCapacity</a></div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00354">sim900_defs.h:354</a></div></div>
+<div class="ttc" id="astruct__SIM900PhonebookCapacity_html_a14ca906676be2804c1a1b9cc36bd1a69"><div class="ttname"><a href="struct__SIM900PhonebookCapacity.html#a14ca906676be2804c1a1b9cc36bd1a69">_SIM900PhonebookCapacity::used</a></div><div class="ttdeci">uint8_t used</div><div class="ttdoc">The number of entries used in the phonebook memory.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00359">sim900_defs.h:359</a></div></div>
+<div class="ttc" id="astruct__SIM900PhonebookCapacity_html_a91c3379f4d3e1c39c98ff3cdc7b3d77e"><div class="ttname"><a href="struct__SIM900PhonebookCapacity.html#a91c3379f4d3e1c39c98ff3cdc7b3d77e">_SIM900PhonebookCapacity::max</a></div><div class="ttdeci">uint8_t max</div><div class="ttdoc">The maximum number of entries that can be stored in the phonebook memory.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00362">sim900_defs.h:362</a></div></div>
+<div class="ttc" id="astruct__SIM900PhonebookCapacity_html_abe8204ae6aae032bd6884558f9c60ca2"><div class="ttname"><a href="struct__SIM900PhonebookCapacity.html#abe8204ae6aae032bd6884558f9c60ca2">_SIM900PhonebookCapacity::memoryType</a></div><div class="ttdeci">String memoryType</div><div class="ttdoc">The type of phonebook memory (e.g., &quot;SM&quot; for SIM memory).</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00356">sim900_defs.h:356</a></div></div>
+<div class="ttc" id="astruct__SIM900RTC_html"><div class="ttname"><a href="struct__SIM900RTC.html">_SIM900RTC</a></div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00200">sim900_defs.h:200</a></div></div>
+<div class="ttc" id="astruct__SIM900RTC_html_a0d823127f398e37acbf8a7881d1e15ea"><div class="ttname"><a href="struct__SIM900RTC.html#a0d823127f398e37acbf8a7881d1e15ea">_SIM900RTC::minute</a></div><div class="ttdeci">uint8_t minute</div><div class="ttdoc">Time component: minute.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00214">sim900_defs.h:214</a></div></div>
+<div class="ttc" id="astruct__SIM900RTC_html_a178169babe83108c56e5615be62cbf2c"><div class="ttname"><a href="struct__SIM900RTC.html#a178169babe83108c56e5615be62cbf2c">_SIM900RTC::gmt</a></div><div class="ttdeci">int8_t gmt</div><div class="ttdoc">GMT (Greenwich Mean Time) offset in hours.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00220">sim900_defs.h:220</a></div></div>
+<div class="ttc" id="astruct__SIM900RTC_html_a7dad2cc09f5dc9d68b14d7aff4e41cd2"><div class="ttname"><a href="struct__SIM900RTC.html#a7dad2cc09f5dc9d68b14d7aff4e41cd2">_SIM900RTC::year</a></div><div class="ttdeci">uint8_t year</div><div class="ttdoc">Date component: year.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00208">sim900_defs.h:208</a></div></div>
+<div class="ttc" id="astruct__SIM900RTC_html_acfa5cb161130bfb6295cd30d42ce8e92"><div class="ttname"><a href="struct__SIM900RTC.html#acfa5cb161130bfb6295cd30d42ce8e92">_SIM900RTC::day</a></div><div class="ttdeci">uint8_t day</div><div class="ttdoc">Date component: day.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00202">sim900_defs.h:202</a></div></div>
+<div class="ttc" id="astruct__SIM900RTC_html_ad17c282a5c9d8519109d31598ef5788e"><div class="ttname"><a href="struct__SIM900RTC.html#ad17c282a5c9d8519109d31598ef5788e">_SIM900RTC::month</a></div><div class="ttdeci">uint8_t month</div><div class="ttdoc">Date component: month.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00205">sim900_defs.h:205</a></div></div>
+<div class="ttc" id="astruct__SIM900RTC_html_ad9c01a85f03675692df19b3abf7f553e"><div class="ttname"><a href="struct__SIM900RTC.html#ad9c01a85f03675692df19b3abf7f553e">_SIM900RTC::second</a></div><div class="ttdeci">uint8_t second</div><div class="ttdoc">Time component: second.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00217">sim900_defs.h:217</a></div></div>
+<div class="ttc" id="astruct__SIM900RTC_html_addf611f4136279653bd46e1c3e2bc5f4"><div class="ttname"><a href="struct__SIM900RTC.html#addf611f4136279653bd46e1c3e2bc5f4">_SIM900RTC::hour</a></div><div class="ttdeci">uint8_t hour</div><div class="ttdoc">Time component: hour.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00211">sim900_defs.h:211</a></div></div>
+<div class="ttc" id="astruct__SIM900Signal_html"><div class="ttname"><a href="struct__SIM900Signal.html">_SIM900Signal</a></div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00374">sim900_defs.h:374</a></div></div>
+<div class="ttc" id="astruct__SIM900Signal_html_aebdba9eecb29f181914c58d278639a6e"><div class="ttname"><a href="struct__SIM900Signal.html#aebdba9eecb29f181914c58d278639a6e">_SIM900Signal::rssi</a></div><div class="ttdeci">uint8_t rssi</div><div class="ttdoc">Received Signal Strength Indication (RSSI) in decibels (dBm).</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00376">sim900_defs.h:376</a></div></div>
+<div class="ttc" id="astruct__SIM900Signal_html_af66531bdf2168f9f2ab15a06b4a8014b"><div class="ttname"><a href="struct__SIM900Signal.html#af66531bdf2168f9f2ab15a06b4a8014b">_SIM900Signal::bit_error_rate</a></div><div class="ttdeci">uint8_t bit_error_rate</div><div class="ttdoc">Bit Error Rate (BER) as a unitless ratio.</div><div class="ttdef"><b>Definition</b> <a href="sim900__defs_8h_source.html#l00379">sim900_defs.h:379</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath">

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SIM900: SIM900 Overview</title>
+<title>SIM900: SIM900 Library Overview</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,108 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">SIM900 Overview </div></div>
+  <div class="headertitle"><div class="title">SIM900 Library Overview </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- PageDoc -->
+<div class="toc"><h3>Table of Contents</h3>
+<ul><ul><li class="level2"><a href="#autotoc_md0">Features</a></li>
+<li class="level2"><a href="#autotoc_md1">Getting Started</a><ul><li class="level3"><a href="#autotoc_md2">Installation</a></li>
+<li class="level3"><a href="#autotoc_md3">Hardware Setup</a></li>
+</ul>
+</li>
+<li class="level2"><a href="#autotoc_md4">Usage</a></li>
+<li class="level2"><a href="#autotoc_md5">Examples</a></li>
+<li class="level2"><a href="#autotoc_md6">Contribution and Feedback</a></li>
+<li class="level2"><a href="#autotoc_md7">Credits</a></li>
+<li class="level2"><a href="#autotoc_md8">TODO</a></li>
+<li class="level2"><a href="#autotoc_md9">License</a></li>
+</ul>
+</ul>
+</div>
+<div class="textblock"><p><img src="https://github.com/nthnn/SIM900/actions/workflows/arduino_ci.yml/badge.svg" alt="Arduino CI" style="pointer-events: none;" class="inline"/> <img src="https://github.com/nthnn/SIM900/actions/workflows/arduino_lint.yml/badge.svg" alt="Arduino Lint" style="pointer-events: none;" class="inline"/> <img src="https://img.shields.io/badge/Library%20Manager-None-red?logo=Arduino" alt="Arduino Release" class="inline"/> <a href="https://github.com/nthnn/SIM900/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-LGPL3.0-yellow.svg" alt="License: LGPL3.0" style="pointer-events: none;" class="inline"/></a></p>
+<p>The SIM900 Arduino Shield Library is a versatile and powerful Arduino library for interfacing with the SIM900 GSM/GPRS module. This library provides a wide range of functionalities for working with the SIM900 module, including sending and receiving calls, sending and receiving SMS, updating and extracting real-time clock data, sending HTTP requests, and retrieving various information about the SIM900 module's status and the network it is connected to.</p>
+<table align="center">
+<tr>
+<td align="center">SIM900 Arduino Shield </td><td align="center">SIM900 Vector  </td></tr>
+<tr>
+<td><img src="sim900-shield.png" alt="" height="350" class="inline"/> </td><td><img src="sim900-vector.png" alt="" height="350" class="inline"/>  </td></tr>
+</table>
+<blockquote class="doxtable">
+<p>&zwj;<b>Note:</b> The <code><a class="el" href="classSIM900.html#afbebb9f4a6fcb1dcd769b387e96ae540" title="Send an HTTP request to a remote server.">SIM900::request(SIM900HTTPRequest)</a></code> function is still underdevelopment. </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md0"></a>
+Features</h2>
+<ul>
+<li><b>Call Handling</b>: Make and receive calls with ease.</li>
+<li><b>SMS Communication</b>: Send and receive SMS messages effortlessly.</li>
+<li><b>Real-Time Clock</b>: Update and extract real-time clock data from the module.</li>
+<li><b>HTTP Requests</b>: Send HTTP requests and retrieve responses.</li>
+<li><b>Information Retrieval</b>: Gather data about network operator, module status, SIM card information, and more.</li>
+<li><b>Phonebook Management</b>: Store and retrieve phonebook accounts.</li>
+<li><b>Extensive Documentation</b>: Well-documented code and usage examples.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Getting Started</h2>
+<h3><a class="anchor" id="autotoc_md2"></a>
+Installation</h3>
+<p>To use this library, follow these steps:</p>
+<ol type="1">
+<li>Download the library from the GitHub <a href="https://github.com/nthnn/SIM900">repository</a>.</li>
+<li>Open your Arduino IDE.</li>
+<li>Click on <code>Sketch</code> -&gt; <code>Include Library</code> -&gt; <code>Add .ZIP Library...</code></li>
+<li>Select the downloaded library ZIP file.</li>
+</ol>
+<p>Alternatively, you can click on the <code>Library Manager</code> then type "SIM900" to install this library for your projects.</p>
+<h3><a class="anchor" id="autotoc_md3"></a>
+Hardware Setup</h3>
+<p>Make sure you have the following components:</p>
+<ul>
+<li>Arduino board compatible with the SIM900 Shield.</li>
+<li>SIM900 Shield with a SIM card inserted.</li>
+<li>3V CR1220 coin battery for RTC (optional).</li>
+</ul>
+<p>Connect the SIM900 Shield to your Arduino board, ensuring it's properly powered and connected. Refer to your hardware documentation for detailed instructions on connecting the module.</p>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Usage</h2>
+<p>To use the SIM900 module in your Arduino sketch:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;SoftwareSerial.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;sim900.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line">SoftwareSerial shieldSerial(7, 8);  <span class="comment">//RX and TX</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> setup() {</div>
+<div class="line">  Serial.begin(9600);               <span class="comment">// Initialize serial communication</span></div>
+<div class="line">  <a class="code hl_class" href="classSIM900.html">SIM900</a> sim900(&amp;shieldSerial);     <span class="comment">// Initialize the SIM900 shield</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Your code goes here...</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> loop() { }</div>
+<div class="ttc" id="aclassSIM900_html"><div class="ttname"><a href="classSIM900.html">SIM900</a></div><div class="ttdoc">A class for interfacing with the SIM900 GSM/GPRS module using Arduino and SoftwareSerial.</div><div class="ttdef"><b>Definition</b> <a href="sim900_8h_source.html#l00042">sim900.h:42</a></div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
+Examples</h2>
+<p>The repository includes a variety of example sketches that demonstrate the library's features. You can find them in the <a href="https://github.com/nthnn/SIM900/tree/main/examples">examples</a> folder.</p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Contribution and Feedback</h2>
+<p>Contributions and feedback are all welcome to enhance this library. If you encounter any issues, have suggestions for improvements, or would like to contribute code, please do so.</p>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Credits</h2>
+<ul>
+<li>The SIM900 vector image above was from a <a href="https://fritzing.org">Fritzing</a> part, found at <a href="https://forum.fritzing.org/t/sim900-part-request/17688">https://forum.fritzing.org/t/sim900-part-request/17688</a>.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md8"></a>
+TODO</h2>
+<ol type="1">
+<li>Receiving, listing, dumping, deleting, and setting the preferred message storage.</li>
+<li>Functional HTTP requesting.</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md9"></a>
+License</h2>
+<p>Copyright 2023 - Nathanne Isip</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath">
