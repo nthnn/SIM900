@@ -342,17 +342,40 @@ typedef struct _SIM900CardAccount {
     SIM900CardService service;
 } SIM900CardAccount;
 
+/**
+ * 
+ * @struct SIM900PhonebookCapacity
+ * @brief A structure representing the capacity of a phonebook memory type.
+ *
+ * This structure provides information about the capacity of a specific phonebook memory type, including the type of
+ * memory, the number of entries used, and the maximum number of entries that can be stored.
+ * 
+ */
 typedef struct _SIM900PhonebookCapacity {
+    /// The type of phonebook memory (e.g., "SM" for SIM memory).
     String memoryType;
 
+    /// The number of entries used in the phonebook memory.
     uint8_t used;
 
+    /// The maximum number of entries that can be stored in the phonebook memory.
     uint8_t max;
 } SIM900PhonebookCapacity;
 
+/**
+ * 
+ * @struct SIM900Signal
+ * @brief A structure representing signal strength and bit error rate information.
+ *
+ * This structure stores information about the signal strength (RSSI) and bit error rate (BER) of the SIM900 module's
+ * network connection, which is crucial for assessing the quality of the cellular signal.
+ * 
+ */
 typedef struct _SIM900Signal {
+    /// Received Signal Strength Indication (RSSI) in decibels (dBm).
     uint8_t rssi;
 
+    /// Bit Error Rate (BER) as a unitless ratio.
     uint8_t bit_error_rate;
 } SIM900Signal;
 
