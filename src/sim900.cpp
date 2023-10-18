@@ -69,6 +69,19 @@ bool SIM900::handshake() {
     return this->isSuccessCommand();
 }
 
+bool SIM900::isCardReady() {
+    this->sendCommand(F("AT+CPIN?"));
+    return this->isSuccessCommand();
+}
+
+bool SIM900::changeCardPin(uint8_t pin) {
+    if(pin > 9999)
+        return false;
+
+    this->sendCommand("AT+CPIN=\"" + String(pin) + "\"");
+    return this->isSuccessCommand();
+}
+
 void SIM900::close() {
     this->sim900->end();
 }
@@ -311,6 +324,11 @@ SIM900CardAccount SIM900::retrievePhonebook(uint8_t index) {
 
     accountInfo.name = response.substring(delim2 + 2, response.length() - 2);
     return accountInfo;
+}
+
+bool SIM900::deletePhonebook(uint8_t index) {
+    this->sendCommand("AT+CPBW=" + String(index));
+    return this->isSuccessCommand();
 }
 
 SIM900CardAccount SIM900::cardNumber() {

@@ -25,6 +25,9 @@ public:
     bool handshake();
     void close();
 
+    bool isCardReady();
+    bool changeCardPin(uint8_t pin);
+
     SIM900DialResult dialUp(String number);
     SIM900DialResult redialUp();
     SIM900DialResult acceptIncomingCall();
@@ -43,7 +46,8 @@ public:
     bool updateRtc(SIM900RTC config);
 
     bool savePhonebook(uint8_t index, SIM900CardAccount account);
-    SIM900CardAccount retrievePhonebook(uint8_t index);
+    bool deletePhonebook(uint8_t index);
+    SIM900CardAccount retrievePhonebook(uint8_t index);    
 
     String manufacturer();
     String softwareRelease();

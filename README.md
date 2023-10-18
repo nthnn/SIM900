@@ -26,6 +26,7 @@ The SIM900 Arduino Shield Library is a versatile and powerful Arduino library fo
 - **Real-Time Clock**: Update and extract real-time clock data from the module.
 - **HTTP Requests**: Send HTTP requests and retrieve responses.
 - **Information Retrieval**: Gather data about network operator, module status, SIM card information, and more.
+- **Phonebook Management**: Store and retrieve phonebook accounts.
 - **Extensive Documentation**: Well-documented code and usage examples.
 
 ## Getting Started
