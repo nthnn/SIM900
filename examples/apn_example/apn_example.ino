@@ -8,18 +8,20 @@ void setup() {
   SIM900 sim900(&shieldSerial);
 
   SIM900APN access;
-  access.apn = "";
-  access.username = "";
-  access.password = "";
+  access.apn = F("smartlte");
+  access.username = F("");
+  access.password = F("");
 
   if(!sim900.connectAPN(access)) {
-    Serial.println("Failed to connect to APN.");
+    Serial.println(F("Failed to connect to APN."));
     return;
   }
-  Serial.println("Connected to APN!");
+  Serial.println(F("Connected to APN!"));
 
   bool gprsEnabled = sim900.enableGPRS();
-  Serial.println(gprsEnabled ? "GPRS was successfully enabled." : "Cannot start GPRS.");
+  Serial.println(gprsEnabled ?
+    F("GPRS was successfully enabled.") :
+    F("Cannot start GPRS."));
 
   if(!gprsEnabled)
     return;
