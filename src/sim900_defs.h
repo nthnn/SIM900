@@ -42,7 +42,7 @@ typedef struct _SIM900RTC {
 } SIM900RTC;
 
 typedef struct _SIM900APN {
-    String name, username, password;
+    String apn, username, password;
 } SIM900APN;
 
 typedef struct _SIM900HTTPHeader {
