@@ -41,4 +41,28 @@ typedef struct _SIM900RTC {
     int8_t gmt;
 } SIM900RTC;
 
+typedef struct _SIM900APN {
+    String name, username, password;
+} SIM900APN;
+
+typedef struct _SIM900HTTPHeader {
+    String key, value;
+} SIM900HTTPHeader;
+
+typedef struct _SIM900HTTPRequest {
+    String method, data, type;
+    String domain, resource;
+    uint8_t status;
+    uint16_t port;
+    SIM900HTTPHeader *headers;
+    uint16_t header_count;
+} SIM900HTTPRequest;
+
+typedef struct _SIM900HTTPResponse {
+    uint16_t status;
+    SIM900HTTPHeader *headers;
+    uint16_t header_count;
+    String data;
+} SIM900HTTPResponse;
+
 #endif
