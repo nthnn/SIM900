@@ -280,6 +280,30 @@ SIM900RTC SIM900::rtc() {
     return rtc; 
 }
 
+SIM900CardAccount SIM900::cardNumber() {
+    this->sendCommand(F("AT+CNUM"));
+
+    SIM900CardAccount account;
+    account.name = F("");
+
+    String response = this->queryResult();
+    if(response == F(""))
+        return account;
+
+    uint8_t delim1 = response.indexOf(','),
+        delim2 = response.indexOf(',', delim1 + 1),
+        delim3 = response.indexOf(',', delim2 + 1),
+        delim4 = response.indexOf(',', delim3 + 1);
+
+    account.name = response.substring(1, delim1 - 1);
+    account.number = response.substring(delim1 + 2, delim2 - 1);
+    account.type = (uint8_t) response.substring(delim2 + 1, delim3).toInt();
+    account.speed = (uint8_t) response.substring(delim3 + 1, delim4).toInt();
+    account.service = (uint8_t) response.substring(delim4 + 1).toInt();
+
+    return account;
+}
+
 String SIM900::manufacturer() {
     this->sendCommand(F("AT+GMI"));
     return this->rawQueryOnLine(2);

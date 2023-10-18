@@ -29,6 +29,15 @@ typedef enum _SIM900OperatorMode {
     SIM900_OPERATOR_MODE_E_UTRAN
 } SIM900OperatorMode;
 
+typedef enum _SIM900CardService {
+    SIM900_CARD_SERVICE_ASYNC,
+    SIM900_CARD_SERVICE_SYNC,
+    SIM900_CARD_SERVICE_PAD_ACCESS,
+    SIM900_CARD_SERVICE_PACKET,
+    SIM900_CARD_SERVICE_VOICE,
+    SIM900_CARD_SERVICE_FAX
+} SIM900CardService;
+
 typedef struct _SIM900Operator {
     SIM900OperatorMode mode;
     SIM900OperatorFormat format;
@@ -64,5 +73,11 @@ typedef struct _SIM900HTTPResponse {
     uint16_t header_count;
     String data;
 } SIM900HTTPResponse;
+
+typedef struct _SIM900CardAccount {
+    String name, number;
+    uint8_t type, speed;
+    SIM900CardService service;
+} SIM900CardAccount;
 
 #endif

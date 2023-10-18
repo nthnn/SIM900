@@ -8,7 +8,7 @@ void setup() {
   SIM900 sim900(&shieldSerial);
 
   SIM900APN access;
-  access.apn = F("smartlte");
+  access.apn = F("");
   access.username = F("");
   access.password = F("");
 

@@ -37,6 +37,8 @@ public:
     SIM900HTTPResponse request(SIM900HTTPRequest request);
 
     SIM900Operator networkOperator();
+    SIM900CardAccount cardNumber();
+
     SIM900RTC rtc();
     bool updateRtc(SIM900RTC config);
 
