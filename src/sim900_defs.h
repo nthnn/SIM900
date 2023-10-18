@@ -50,7 +50,7 @@ typedef struct _SIM900HTTPHeader {
 } SIM900HTTPHeader;
 
 typedef struct _SIM900HTTPRequest {
-    String method, data, type;
+    String method, data;
     String domain, resource;
     uint8_t status;
     uint16_t port;

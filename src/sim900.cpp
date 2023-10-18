@@ -184,6 +184,9 @@ bool SIM900::connectAPN(SIM900APN apn) {
 }
 
 bool SIM900::enableGPRS() {
+    if(!this->hasAPN)
+        return false;
+
     this->sendCommand(F("AT+CIICR"));
     delay(1000);
 
@@ -194,17 +197,19 @@ SIM900HTTPResponse SIM900::request(SIM900HTTPRequest request) {
     SIM900HTTPResponse response;
     response.status = -1;
 
+    if(!this->hasAPN)
+        return response;
+
     this->sendCommand(
         "AT+CIPSTART=\"TCP\",\"" + request.domain +
         "\"," + String(request.port)
     );
-    if(!this->isSuccessCommand())
-        return response;
     
     String resp = this->getResponse();
     resp.trim();
 
-    if(resp != "CONNECT OK")
+    delay(1500);
+    if(!resp.endsWith(F("CONNECT OK")))
         return response;
 
     String requestStr = request.method + " " +
@@ -216,18 +221,12 @@ SIM900HTTPResponse SIM900::request(SIM900HTTPRequest request) {
             request.headers[i].value + "\r\n";
 
     if(request.data != "" || request.data != NULL)
-        requestStr += request.data;
-    requestStr += "\r\n\r\n";
+        requestStr += request.data + "\r\n";
 
+    requestStr += F("\r\n");
     this->sendCommand(requestStr);
-    Serial.println(requestStr);
 
-    String read = "";
-    while(!read.endsWith("DEACT")) {
-        read = this->getResponse();
-        Serial.println("-> " + read);
-    }
-
+    // TODO
     return response;
 }
 
