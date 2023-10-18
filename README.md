@@ -84,6 +84,11 @@ Contributions and feedback are all welcome to enhance this library. If you encou
 
 - The SIM900 vector image above was from a [Fritzing](https://fritzing.org) part, found at [https://forum.fritzing.org/t/sim900-part-request/17688](https://forum.fritzing.org/t/sim900-part-request/17688).
 
+## TODO
+
+1. Receiving, listing, dumping, deleting, and setting the preferred message storage.
+2. Functional HTTP requesting.
+
 ## License
 
 Copyright 2023 - Nathanne Isip
