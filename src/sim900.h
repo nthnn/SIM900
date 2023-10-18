@@ -31,6 +31,10 @@ public:
 
     bool sendSMS(String number, String message);
 
+    bool connectAPN(SIM900APN apn);
+    bool enableGPRS();
+    SIM900HTTPResponse request(SIM900HTTPRequest request);
+
     SIM900Operator networkOperator();
     SIM900RTC rtc();
     bool updateRtc(SIM900RTC config);
@@ -40,6 +44,7 @@ public:
     String imei();
     String chipModel();
     String chipName();
+    String ipAddress();
 };
 
 #endif
