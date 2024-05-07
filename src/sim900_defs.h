@@ -196,7 +196,7 @@ typedef enum _SIM900CardService {
  * values. The same is true for newer Arduino compilers, too. So impilicit cast of integer value to an enum type is no longer allowed. For the sake of the safety of an explicit
  * cast is better to first check the range of the input. 
 */
-inline SIM900CardService intToSIM900CardService(int i){
+inline SIM900CardService intToSIM900CardService(uint8_t i){
     if(i < SIM900CardService::SIM900_CARD_SERVICE_ASYNC ||
         i > SIM900CardService::SIM900_CARD_SERVICE_FAX)
         return SIM900CardService::SIM900_CARD_SERVICE_ASYNC;
