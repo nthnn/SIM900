@@ -25,9 +25,8 @@
 #define SIM900_H
 
 #include <Arduino.h>
-#include <SoftwareSerial.h>
 
-#include <sim900_defs.h>
+#include "sim900_defs.h"
 
 /**
  * 
@@ -42,7 +41,7 @@
 class SIM900 {
 private:
     /// The SoftwareSerial object used for communication with the SIM900 module.
-    SoftwareSerial *sim900;
+    Stream& sim900;
 
     /// A flag indicating whether Access Point Name (APN) configuration is set.
     bool hasAPN = false;
@@ -73,7 +72,7 @@ public:
      * @param _sim900 A pointer to the SoftwareSerial object for communication with the SIM900 module.
      * 
      */
-    SIM900(SoftwareSerial *_sim900);
+    SIM900(Stream& _sim900);
 
     /**
      * 

@@ -6,7 +6,8 @@ SoftwareSerial shieldSerial(7, 8);
 void setup() {
   Serial.begin(9600);
 
-  SIM900 sim900(&shieldSerial);
+  shieldSerial.begin(9600);
+  SIM900 sim900(shieldSerial);
   SIM900Signal signal = sim900.signal();
 
   Serial.println(F("Signal Strength"));

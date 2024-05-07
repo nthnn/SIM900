@@ -21,18 +21,17 @@
  * THE SOFTWARE.
  */
 
-#include <sim900.h>
-#include <SoftwareSerial.h>
+#include "sim900.h"
 
 void SIM900::sendCommand(String message) {
-    this->sim900->println(message);
+    this->sim900.println(message);
 }
 
 String SIM900::getResponse() {
     delay(500);
     
-    if(this->sim900->available() > 0) {
-        String response = this->sim900->readString();
+    if(this->sim900.available() > 0) {
+        String response = this->sim900.readString();
         response.trim();
 
         return response;
@@ -82,10 +81,7 @@ String SIM900::queryResult() {
     return result;
 }
 
-SIM900::SIM900(SoftwareSerial *_sim900):
-    sim900(_sim900) {
-    this->sim900->begin(9600);
-}
+SIM900::SIM900(Stream& _sim900):sim900(_sim900){}
 
 bool SIM900::handshake() {
     this->sendCommand(F("AT"));
@@ -122,9 +118,9 @@ SIM900Signal SIM900::signal() {
     return signal;
 }
 
-void SIM900::close() {
-    this->sim900->end();
-}
+// void SIM900::close() {
+//     this->sim900->end();
+// }
 
 SIM900DialResult SIM900::dialUp(String number) {
     this->sendCommand("ATD+ " + number + ";");
@@ -194,15 +190,15 @@ bool SIM900::sendSMS(String number, String message) {
     delay(500);
     this->sendCommand(message);
     delay(500);
-    this->sim900->write(0x1a);
+    this->sim900.write(0x1a);
 
     return this->getReturnedMode().startsWith(">");
 }
 
 SIM900Operator SIM900::networkOperator() {
     SIM900Operator simOperator;
-    simOperator.mode = 0;
-    simOperator.format = 0;
+    simOperator.mode = static_cast<SIM900OperatorMode>(0);
+    simOperator.format = static_cast<SIM900OperatorFormat>(0);
     simOperator.name = "";
 
     this->sendCommand(F("AT+COPS?"));
@@ -211,8 +207,8 @@ SIM900Operator SIM900::networkOperator() {
     uint8_t delim1 = response.indexOf(','),
         delim2 = response.indexOf(',', delim1 + 1);
 
-    simOperator.mode = (uint8_t) response.substring(0, delim1).toInt();
-    simOperator.format = (uint8_t) response.substring(delim1 + 1, delim2).toInt();
+    simOperator.mode = intToSIM900OperatorMode((uint8_t) response.substring(0, delim1).toInt());
+    simOperator.format = intToSIM900OperatorFormat((uint8_t) response.substring(delim1 + 1, delim2).toInt());
     simOperator.name = response.substring(delim2 + 2, response.length() - 2);
 
     return simOperator;
@@ -347,7 +343,7 @@ SIM900CardAccount SIM900::retrievePhonebook(uint8_t index) {
     this->sendCommand("AT+CPBR=" + String(index));
 
     SIM900CardAccount accountInfo;
-    accountInfo.numberType = 0;
+    accountInfo.numberType = static_cast<SIM900PhonebookType>(0);
 
     String response = this->queryResult();
     response = response.substring(response.indexOf(',') + 1);
@@ -359,8 +355,8 @@ SIM900CardAccount SIM900::retrievePhonebook(uint8_t index) {
     
     uint8_t type = (uint8_t) response.substring(delim1 + 1, delim2).toInt();
     if(type == 129 || type == 145)
-        accountInfo.numberType = type;
-    else accountInfo.numberType = 0;
+        accountInfo.numberType = static_cast<SIM900PhonebookType>(type);
+    else accountInfo.numberType = static_cast<SIM900PhonebookType>(0);
 
     accountInfo.name = response.substring(delim2 + 2, response.length() - 2);
     return accountInfo;
@@ -408,8 +404,8 @@ SIM900CardAccount SIM900::cardNumber() {
     account.number = response.substring(delim1 + 2, delim2 - 1);
     account.type = (uint8_t) response.substring(delim2 + 1, delim3).toInt();
     account.speed = (uint8_t) response.substring(delim3 + 1, delim4).toInt();
-    account.service = (uint8_t) response.substring(delim4 + 1).toInt();
-    account.numberType = 0;
+    account.service = intToSIM900CardService((uint8_t) response.substring(delim4 + 1).toInt());
+    account.numberType = static_cast<SIM900PhonebookType>(0);
 
     return account;
 }
