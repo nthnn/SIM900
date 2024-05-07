@@ -12,7 +12,6 @@ void setup() {
     sim900.sendSMS("+XXxxxxxxxxxx", "Hello, world!!")
       ? "Sent!" : "Not sent."
   );
-  sim900.close();
 }
 
 void loop() { }
