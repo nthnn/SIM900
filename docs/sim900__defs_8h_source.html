@@ -186,7 +186,7 @@ $(document).ready(function(){initNavTree('sim900__defs_8h_source.html',''); init
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    SIM900_CARD_SERVICE_FAX</div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>} SIM900CardService;</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="keyword">inline</span> SIM900CardService intToSIM900CardService(<span class="keywordtype">int</span> i){</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="keyword">inline</span> SIM900CardService intToSIM900CardService(uint8_t i){</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordflow">if</span>(i &lt; SIM900CardService::SIM900_CARD_SERVICE_ASYNC ||</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        i &gt; SIM900CardService::SIM900_CARD_SERVICE_FAX)</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">return</span> SIM900CardService::SIM900_CARD_SERVICE_ASYNC;</div>
