@@ -64,7 +64,8 @@ SoftwareSerial shieldSerial(7, 8);  //RX and TX
 
 void setup() {
   Serial.begin(9600);               // Initialize serial communication
-  SIM900 sim900(&shieldSerial);     // Initialize the SIM900 shield
+  shieldSerial.begin(9600) // Initialize shield communication
+  SIM900 sim900(shieldSerial);     // Initialize the SIM900 shield
 
   // Your code goes here...
 }
