@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-#include <sim900.h>
+#include "sim900.h"
 #include <SoftwareSerial.h>
 
 void SIM900::sendCommand(String message) {
