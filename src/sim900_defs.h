@@ -97,11 +97,12 @@ typedef enum _SIM900OperatorFormat {
  * values. The same is true for newer Arduino compilers, too. So impilicit cast of integer value to an enum type is no longer allowed. For the sake of the safety of an explicit
  * cast is better to first check the range of the input. 
 */
-SIM900OperatorFormat intToSIM900OperatorFormat(int i){
-    if (i < SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_AUTO || i > SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_MANUAL_AUTO)
+inline SIM900OperatorFormat intToSIM900OperatorFormat(uint8_t i){
+    if(i < SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_AUTO ||
+        i > SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_MANUAL_AUTO)
         return SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_AUTO;
-    else
-        return static_cast<SIM900OperatorFormat>(i);
+
+    return static_cast<SIM900OperatorFormat>(i);
 }
 
 /**
@@ -149,11 +150,12 @@ typedef enum _SIM900OperatorMode {
  * values. The same is true for newer Arduino compilers, too. So impilicit cast of integer value to an enum type is no longer allowed. For the sake of the safety of an explicit
  * cast is better to first check the range of the input. 
 */
-SIM900OperatorMode intToSIM900OperatorMode(int i){
-    if (i < SIM900OperatorMode::SIM900_OPERATOR_MODE_GSM || i > SIM900OperatorMode::SIM900_OPERATOR_MODE_E_UTRAN)
+inline SIM900OperatorMode intToSIM900OperatorMode(int i){
+    if(i < SIM900OperatorMode::SIM900_OPERATOR_MODE_GSM ||
+        i > SIM900OperatorMode::SIM900_OPERATOR_MODE_E_UTRAN)
         return SIM900OperatorMode::SIM900_OPERATOR_MODE_GSM;
-    else
-        return static_cast<SIM900OperatorMode>(i);
+
+    return static_cast<SIM900OperatorMode>(i);
 }
 
 /**
@@ -194,11 +196,12 @@ typedef enum _SIM900CardService {
  * values. The same is true for newer Arduino compilers, too. So impilicit cast of integer value to an enum type is no longer allowed. For the sake of the safety of an explicit
  * cast is better to first check the range of the input. 
 */
-SIM900CardService intToSIM900CardService(int i){
-    if (i < SIM900CardService::SIM900_CARD_SERVICE_ASYNC || i > SIM900CardService::SIM900_CARD_SERVICE_FAX)
+inline SIM900CardService intToSIM900CardService(int i){
+    if(i < SIM900CardService::SIM900_CARD_SERVICE_ASYNC ||
+        i > SIM900CardService::SIM900_CARD_SERVICE_FAX)
         return SIM900CardService::SIM900_CARD_SERVICE_ASYNC;
-    else
-        return static_cast<SIM900CardService>(i);
+
+    return static_cast<SIM900CardService>(i);
 }
 
 /**
