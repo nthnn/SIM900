@@ -22,17 +22,16 @@
  */
 
 #include "sim900.h"
-#include <SoftwareSerial.h>
 
 void SIM900::sendCommand(String message) {
-    this->sim900->println(message);
+    this->sim900.println(message);
 }
 
 String SIM900::getResponse() {
     delay(500);
     
-    if(this->sim900->available() > 0) {
-        String response = this->sim900->readString();
+    if(this->sim900.available() > 0) {
+        String response = this->sim900.readString();
         response.trim();
 
         return response;
@@ -82,10 +81,7 @@ String SIM900::queryResult() {
     return result;
 }
 
-SIM900::SIM900(SoftwareSerial *_sim900):
-    sim900(_sim900) {
-    this->sim900->begin(9600);
-}
+SIM900::SIM900(Stream& _sim900):sim900(_sim900){}
 
 bool SIM900::handshake() {
     this->sendCommand(F("AT"));
@@ -122,9 +118,9 @@ SIM900Signal SIM900::signal() {
     return signal;
 }
 
-void SIM900::close() {
-    this->sim900->end();
-}
+// void SIM900::close() {
+//     this->sim900->end();
+// }
 
 SIM900DialResult SIM900::dialUp(String number) {
     this->sendCommand("ATD+ " + number + ";");
@@ -194,7 +190,7 @@ bool SIM900::sendSMS(String number, String message) {
     delay(500);
     this->sendCommand(message);
     delay(500);
-    this->sim900->write(0x1a);
+    this->sim900.write(0x1a);
 
     return this->getReturnedMode().startsWith(">");
 }
