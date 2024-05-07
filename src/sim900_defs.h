@@ -87,6 +87,13 @@ typedef enum _SIM900OperatorFormat {
     SIM900_OPERATOR_FORMAT_MANUAL_AUTO
 } SIM900OperatorFormat;
 
+SIM900OperatorFormat intToSIM900OperatorFormat(int i){
+    if (i < SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_AUTO || i > SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_MANUAL_AUTO)
+        return SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_AUTO;
+    else
+        return static_cast<SIM900OperatorFormat>(i);
+}
+
 /**
  * 
  * @enum SIM900OperatorMode
@@ -121,6 +128,13 @@ typedef enum _SIM900OperatorMode {
     /// E-UTRAN (4G) operating mode, for advanced 4G LTE network connectivity.
     SIM900_OPERATOR_MODE_E_UTRAN
 } SIM900OperatorMode;
+
+SIM900OperatorMode intToSIM900OperatorMode(int i){
+    if (i < SIM900OperatorMode::SIM900_OPERATOR_MODE_GSM || i > SIM900OperatorMode::SIM900_OPERATOR_MODE_E_UTRAN)
+        return SIM900OperatorMode::SIM900_OPERATOR_MODE_GSM;
+    else
+        return static_cast<SIM900OperatorMode>(i);
+}
 
 /**
  * 

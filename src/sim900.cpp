@@ -201,8 +201,8 @@ bool SIM900::sendSMS(String number, String message) {
 
 SIM900Operator SIM900::networkOperator() {
     SIM900Operator simOperator;
-    simOperator.mode = 0;
-    simOperator.format = 0;
+    simOperator.mode = static_cast<SIM900OperatorMode>(0);
+    simOperator.format = static_cast<SIM900OperatorFormat>(0);
     simOperator.name = "";
 
     this->sendCommand(F("AT+COPS?"));
@@ -211,8 +211,8 @@ SIM900Operator SIM900::networkOperator() {
     uint8_t delim1 = response.indexOf(','),
         delim2 = response.indexOf(',', delim1 + 1);
 
-    simOperator.mode = (uint8_t) response.substring(0, delim1).toInt();
-    simOperator.format = (uint8_t) response.substring(delim1 + 1, delim2).toInt();
+    simOperator.mode = intToSIM900OperatorMode((uint8_t) response.substring(0, delim1).toInt());
+    simOperator.format = intToSIM900OperatorFormat((uint8_t) response.substring(delim1 + 1, delim2).toInt());
     simOperator.name = response.substring(delim2 + 2, response.length() - 2);
 
     return simOperator;
@@ -347,7 +347,7 @@ SIM900CardAccount SIM900::retrievePhonebook(uint8_t index) {
     this->sendCommand("AT+CPBR=" + String(index));
 
     SIM900CardAccount accountInfo;
-    accountInfo.numberType = 0;
+    accountInfo.numberType = static_cast<SIM900PhonebookType>(0);
 
     String response = this->queryResult();
     response = response.substring(response.indexOf(',') + 1);
@@ -359,8 +359,8 @@ SIM900CardAccount SIM900::retrievePhonebook(uint8_t index) {
     
     uint8_t type = (uint8_t) response.substring(delim1 + 1, delim2).toInt();
     if(type == 129 || type == 145)
-        accountInfo.numberType = type;
-    else accountInfo.numberType = 0;
+        accountInfo.numberType = static_cast<SIM900PhonebookType>(type);
+    else accountInfo.numberType = static_cast<SIM900PhonebookType>(0);
 
     accountInfo.name = response.substring(delim2 + 2, response.length() - 2);
     return accountInfo;
@@ -409,7 +409,7 @@ SIM900CardAccount SIM900::cardNumber() {
     account.type = (uint8_t) response.substring(delim2 + 1, delim3).toInt();
     account.speed = (uint8_t) response.substring(delim3 + 1, delim4).toInt();
     account.service = (uint8_t) response.substring(delim4 + 1).toInt();
-    account.numberType = 0;
+    account.numberType = static_cast<SIM900PhonebookType>(0);
 
     return account;
 }
