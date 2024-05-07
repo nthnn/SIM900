@@ -5,7 +5,8 @@ SoftwareSerial shieldSerial(7, 8);
 
 void setup() {
   Serial.begin(9600);
-  SIM900 sim900(&shieldSerial);
+  shieldSerial.begin(9600);
+  SIM900 sim900(shieldSerial);
   uint8_t index = 1;
 
   SIM900CardAccount account;

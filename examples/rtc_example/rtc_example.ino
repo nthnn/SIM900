@@ -7,7 +7,8 @@ void printRTC(SIM900RTC rtc);
 
 void setup() {
   Serial.begin(9600);
-  SIM900 sim900(&shieldSerial);
+  shieldSerial.begin(9600);
+  SIM900 sim900(shieldSerial);
 
   SIM900RTC rtc;
   rtc.year = 2;
