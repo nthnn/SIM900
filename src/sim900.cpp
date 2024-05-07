@@ -408,7 +408,7 @@ SIM900CardAccount SIM900::cardNumber() {
     account.number = response.substring(delim1 + 2, delim2 - 1);
     account.type = (uint8_t) response.substring(delim2 + 1, delim3).toInt();
     account.speed = (uint8_t) response.substring(delim3 + 1, delim4).toInt();
-    account.service = (uint8_t) response.substring(delim4 + 1).toInt();
+    account.service = intToSIM900CardService((uint8_t) response.substring(delim4 + 1).toInt());
     account.numberType = static_cast<SIM900PhonebookType>(0);
 
     return account;

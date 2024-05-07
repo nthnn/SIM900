@@ -91,11 +91,9 @@ typedef enum _SIM900OperatorFormat {
  * @param i Integer input to be casted.
  * @return A valid SIM900OperatorFormat value.
  * 
- * @brief This function receives an integer value and checks its range. If the value is not in range, the 
- * default value of SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_AUTO is returned other than that a static_cast from
- * the integer value to SIM900OperatorFormat is performed and the result is returned.
+ * @brief A function to safely cast from integer value to SIM900OperatorFormat. Invalid inputs are casted to default value of SIM900_OPERATOR_FORMAT_AUTO.
  * 
- * @details From C++11 up to newer versions of C++, enumerators are considered as a specific type rather than integer 
+ * From C++11 up to newer versions of C++, enumerators are considered as a specific type rather than integer 
  * values. The same is true for newer Arduino compilers, too. So impilicit cast of integer value to an enum type is no longer allowed. For the sake of the safety of an explicit
  * cast is better to first check the range of the input. 
 */
@@ -145,11 +143,9 @@ typedef enum _SIM900OperatorMode {
  * @param i Integer input to be casted.
  * @return A valid SIM900OperatorMode value.
  * 
- * @brief This function receives an integer value and checks its range. If the value is not in range, the 
- * default value of SIM900OperatorMode::SIM900_OPERATOR_MODE_GSM is returned other than that a static_cast from
- * the integer value to SIM900OperatorMode is performed and the result is returned.
+ * @brief A function to safely cast from integer value to SIM900OperatorMode. Invalid inputs are casted to default value of SIM900_OPERATOR_MODE_GSM.
  * 
- * @details From C++11 up to newer versions of C++, enumerators are considered as a specific type rather than integer 
+ * From C++11 up to newer versions of C++, enumerators are considered as a specific type rather than integer 
  * values. The same is true for newer Arduino compilers, too. So impilicit cast of integer value to an enum type is no longer allowed. For the sake of the safety of an explicit
  * cast is better to first check the range of the input. 
 */
@@ -187,6 +183,23 @@ typedef enum _SIM900CardService {
     /// Fax service for facsimile communication.
     SIM900_CARD_SERVICE_FAX
 } SIM900CardService;
+
+/**
+ * @param i Integer input to be casted.
+ * @return A valid SIM900CardService value.
+ * 
+ * @brief A function to safely cast from integer value to SIM900CardService. Invalid inputs are casted to default value of SIM900_CARD_SERVICE_ASYNC.
+ * 
+ * From C++11 up to newer versions of C++, enumerators are considered as a specific type rather than integer 
+ * values. The same is true for newer Arduino compilers, too. So impilicit cast of integer value to an enum type is no longer allowed. For the sake of the safety of an explicit
+ * cast is better to first check the range of the input. 
+*/
+SIM900CardService intToSIM900CardService(int i){
+    if (i < SIM900CardService::SIM900_CARD_SERVICE_ASYNC || i > SIM900CardService::SIM900_CARD_SERVICE_FAX)
+        return SIM900CardService::SIM900_CARD_SERVICE_ASYNC;
+    else
+        return static_cast<SIM900CardService>(i);
+}
 
 /**
  * 
