@@ -87,6 +87,18 @@ typedef enum _SIM900OperatorFormat {
     SIM900_OPERATOR_FORMAT_MANUAL_AUTO
 } SIM900OperatorFormat;
 
+/**
+ * @param i Integer input to be casted.
+ * @return A valid SIM900OperatorFormat value.
+ * 
+ * @brief This function receives an integer value and checks its range. If the value is not in range, the 
+ * default value of SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_AUTO is returned other than that a static_cast from
+ * the integer value to SIM900OperatorFormat is performed and the result is returned.
+ * 
+ * @details From C++11 up to newer versions of C++, enumerators are considered as a specific type rather than integer 
+ * values. The same is true for newer Arduino compilers, too. So impilicit cast of integer value to an enum type is no longer allowed. For the sake of the safety of an explicit
+ * cast is better to first check the range of the input. 
+*/
 SIM900OperatorFormat intToSIM900OperatorFormat(int i){
     if (i < SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_AUTO || i > SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_MANUAL_AUTO)
         return SIM900OperatorFormat::SIM900_OPERATOR_FORMAT_AUTO;
@@ -129,6 +141,18 @@ typedef enum _SIM900OperatorMode {
     SIM900_OPERATOR_MODE_E_UTRAN
 } SIM900OperatorMode;
 
+/**
+ * @param i Integer input to be casted.
+ * @return A valid SIM900OperatorMode value.
+ * 
+ * @brief This function receives an integer value and checks its range. If the value is not in range, the 
+ * default value of SIM900OperatorMode::SIM900_OPERATOR_MODE_GSM is returned other than that a static_cast from
+ * the integer value to SIM900OperatorMode is performed and the result is returned.
+ * 
+ * @details From C++11 up to newer versions of C++, enumerators are considered as a specific type rather than integer 
+ * values. The same is true for newer Arduino compilers, too. So impilicit cast of integer value to an enum type is no longer allowed. For the sake of the safety of an explicit
+ * cast is better to first check the range of the input. 
+*/
 SIM900OperatorMode intToSIM900OperatorMode(int i){
     if (i < SIM900OperatorMode::SIM900_OPERATOR_MODE_GSM || i > SIM900OperatorMode::SIM900_OPERATOR_MODE_E_UTRAN)
         return SIM900OperatorMode::SIM900_OPERATOR_MODE_GSM;
