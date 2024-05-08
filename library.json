@@ -1,6 +1,6 @@
 {
     "name": "SIM900",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Arduino SIM900 Shield Comprehensive Library",
     "keywords": ["SIM900", "Shield", "Communication"],
     "authors": [
